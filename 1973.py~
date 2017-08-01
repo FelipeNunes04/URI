@@ -1,0 +1,50 @@
+
+n = int(input())
+metade = n-1 if n%2==0 else n
+nums = input()
+aux = ''
+lista1,lista2 = [],[]
+for i in range(len(nums)):
+	if(nums[i]==' '):
+		lista1.append(int(aux))
+		aux = ''
+	else:
+		aux+=nums[i]
+	if(i==metade):
+		break
+
+print(len(nums))
+for i in range(metade+1,len(nums)):
+	if(nums[i]==' '):
+		lista2.append(int(aux))
+		aux = ''
+	else:
+		aux+=nums[i]
+else:
+	lista2.append(int(aux))
+
+soma = sum(lista1)+sum(lista2)
+pos = 0
+contI = n/2 if n%2==0 else n//2+1
+
+for i,num in enumerate(lista1):
+	if(num%2==0):
+		ataques = i+1
+		soma-=((i*2)+1)-pos
+		break
+	if(num-1==0):
+		pos = i+1
+
+else:
+	for i,num in enumerate(lista2):
+		if(num%2==0):
+			ataques = i+1+contI
+			soma-=(((i+contI)*2)+1)-pos
+			break
+		if(num-1==0):
+			pos = i+1
+	else:
+		ataques = n
+		soma-=ataques
+
+print("%d %d"%(ataques,soma))
